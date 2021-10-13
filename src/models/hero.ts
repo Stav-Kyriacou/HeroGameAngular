@@ -4,4 +4,12 @@ export class Hero {
     minRoll: number;
     maxRoll: number;
     startingUses: number;
+
+    constructor(id: number, name: string, minRoll: number, maxRoll: number, startingUses: number) {
+        this.id = id;
+        this.name = name;
+        this.minRoll = minRoll;
+        this.maxRoll = maxRoll;
+        this.startingUses = startingUses;
+    }
 }
