@@ -2,3 +2,10 @@
 body {
     background-color: rgb(70, 70, 70);
 }
+.title {
+    margin: 0px;
+    padding: 0px;
+}
+.name {
+    margin-top: 0px;
+}
