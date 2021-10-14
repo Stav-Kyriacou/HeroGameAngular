@@ -1,0 +1,27 @@
+.battleText {
+    font-size: 32px;
+    color: white;
+    margin: 0px;
+    padding: 0px 0px 10px 0px;
+}
+.attackBtn {
+    width: 100px;
+    height: 30px;
+}
+.character {
+    display: flex;
+}
+app-hero {
+    width: 180px;
+    height: 100px;
+    background-color: white;
+    margin: 5px;
+    padding: 5px;
+}
+app-villain {
+    width: 180px;
+    height: 100px;
+    background-color: white;
+    margin: 5px;
+    padding: 5px;
+}
