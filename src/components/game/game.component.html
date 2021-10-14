@@ -1,6 +1,6 @@
 <h1 class="title">Heroes</h1>
-<div class="character">
-    <app-hero *ngFor="let hero of heroList" [hero]="hero"></app-hero>
+<div class="characterContainer">
+    <app-hero class="character" *ngFor="let hero of heroList" [hero]="hero"></app-hero>
 </div>
 <select id="hero-select" (change)="selectChange()">
     <option *ngFor="let hero of heroList; let i = index" [value]="i">{{ hero.name }}</option>
@@ -8,8 +8,8 @@
 <hr>
 
 <h1 class="title">Villains</h1>
-<div class="character">
-    <app-villain *ngFor="let villain of villainList" [villain]="villain"></app-villain>
+<div class="characterContainer">
+    <app-villain class="character" *ngFor="let villain of villainList" [villain]="villain"></app-villain>
 </div>
 <select id="villain-select" (change)="selectChange()">
     <option *ngFor="let villain of villainList; let i = index" [value]="i">{{ villain.name }}</option>
@@ -17,4 +17,5 @@
 <hr>
 
 <p id="battle-text" class="battleText">{{ selectedHero.name }} is attacking {{ selectedVillain.name }}</p>
+<p id="combatLog" class="combatLog">Combat Log</p>
 <button id="attack-btn" class="attackBtn" (click)="attack()">Attack</button>
