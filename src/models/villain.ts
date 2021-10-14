@@ -4,10 +4,10 @@ export class Villain {
     maxHitPoints: number;
     currentHitPoints: number;
 
-    constructor(id: number, name: string) {
+    constructor(id: number, name: string, minHP: number, maxHP: number) {
         this.id = id;
         this.name = name;
-        this.maxHitPoints = Math.floor(Math.random() * 10) + 1;
+        this.maxHitPoints = Math.floor(Math.random() * maxHP) + minHP;
         this.currentHitPoints = this.maxHitPoints;
     }
     takeDamage(damage: number): void {
