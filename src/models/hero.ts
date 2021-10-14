@@ -1,3 +1,5 @@
+import { Villain } from "./villain";
+
 export class Hero {
     id: number;
     name: string;
@@ -13,5 +15,18 @@ export class Hero {
         this.maxRoll = maxRoll;
         this.startingUses = startingUses;
         this.usesRemaining = startingUses;
+    }
+    roll(): number {
+        return Math.floor(Math.random() * this.maxRoll) + this.minRoll;
+    }
+    attack(target: Villain): number {
+        if (this.usesRemaining > 0 && target.currentHitPoints > 0) {
+            let damage: number = this.roll();
+            target.takeDamage(damage);
+            this.usesRemaining--;
+            return damage;
+        } else {
+            return 0;
+        }
     }
 }
