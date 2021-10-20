@@ -8,7 +8,7 @@ import { Hero } from 'src/models/hero';
   providedIn: 'root'
 })
 export class HeroService {
-  readonly baseUrl: string = "https://localhost:5001/"
+  readonly baseUrl: string = "http://stavkyriacou.somee.com/HeroAPI/"
 
   constructor(private _http: HttpClient) { }
 
