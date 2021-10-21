@@ -1,5 +1,13 @@
 import { Villain } from "./villain";
 
+export interface HeroData {
+    id: number;
+    name: string;
+    minRoll: number;
+    maxRoll: number;
+    startingUses: number;
+}
+
 export class Hero {
     id: number;
     name: string;
@@ -7,14 +15,13 @@ export class Hero {
     maxRoll: number;
     startingUses: number;
     usesRemaining: number;
-
-    constructor(id: number, name: string, minRoll: number, maxRoll: number, startingUses: number) {
-        this.id = id;
-        this.name = name;
-        this.minRoll = minRoll;
-        this.maxRoll = maxRoll;
-        this.startingUses = startingUses;
-        this.usesRemaining = startingUses;
+    constructor(heroData: HeroData) {
+        this.id = heroData.id;
+        this.name = heroData.name;
+        this.minRoll = heroData.minRoll;
+        this.maxRoll = heroData.maxRoll;
+        this.startingUses = heroData.startingUses;
+        this.usesRemaining = this.startingUses;
     }
     roll(): number {
         //returns a random number between the min and max roll (both inclusive)
