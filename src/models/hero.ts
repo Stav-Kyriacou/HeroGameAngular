@@ -28,7 +28,7 @@ export class Hero {
         return Math.floor(Math.random() * (this.maxRoll - this.minRoll + 1)) + this.minRoll;
     }
     attack(target: Villain): number {
-        if (this.usesRemaining > 0 && target.currentHitPoints > 0) {
+        if (this.usesRemaining > 0 && target.currentHp > 0) {
             let damage: number = this.roll();
             target.takeDamage(damage);
             this.usesRemaining--;
