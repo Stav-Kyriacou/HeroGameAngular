@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Hero, HeroData } from 'src/models/hero';
 import { map } from 'rxjs/operators';
+import { BaseService } from './base.service';
 
 //CORS resources
 //https://docs.microsoft.com/en-us/aspnet/core/security/cors?view=aspnetcore-5.0
@@ -16,11 +17,11 @@ import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class HeroService {
-  readonly baseUrl: string = "http://stavkyriacou.somee.com/HeroAPI/";
+export class HeroService extends BaseService {
 
-  constructor(private _http: HttpClient) { }
-
+  constructor(private _http: HttpClient) {
+    super();
+  }
 
   // getHero(): Observable<Hero> {
   //   return this._http.get<Hero>(this.baseUrl + "Hero/1").pipe(map(data => new Hero(data)));
