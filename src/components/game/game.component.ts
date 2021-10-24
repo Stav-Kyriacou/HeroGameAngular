@@ -3,6 +3,7 @@ import { Hero } from 'src/models/hero';
 import { Villain } from 'src/models/villain';
 import { HeroService } from 'src/services/hero.service';
 import { map } from 'rxjs/operators';
+import { VillainService } from 'src/services/villain.service';
 
 @Component({
   selector: 'app-game',
@@ -13,20 +14,24 @@ export class GameComponent implements OnInit {
   // heroList: Hero[] = [new Hero(1, "Hero One", 1, 6, 3),
   //                     new Hero(2, "Hero Two", 1, 6, 3),
   //                     new Hero(3, "Hero Three", 1, 6, 3)];
+  // villainList: Villain[] = [new Villain(1, "Villain One", 1, 10),
+  //                           new Villain(2, "Villain Two", 1, 10),
+  //                           new Villain(2, "Villain Three", 1, 10)];
   heroList: Hero[];
-  villainList: Villain[] = [new Villain(1, "Villain One", 1, 10),
-  new Villain(2, "Villain Two", 1, 10),
-  new Villain(2, "Villain Three", 1, 10)];
+  villainList: Villain[];
   selectedHero: Hero;
   selectedVillain: Villain;
   totalUsesRemaining: number = 0;
   totalHpRemaining: number = 0;
 
-  constructor(private _heroService: HeroService) {
+  constructor(private _heroService: HeroService, private _villainService: VillainService) {
 
   }
   ngOnInit(): void {
     this._heroService.getAllHeroes().subscribe(heroes => this.heroList = heroes,
+      error => console.log("Error: " + error),
+      () => { this.init() });
+    this._villainService.getAllVillains().subscribe(villains => this.villainList = villains,
       error => console.log("Error: " + error),
       () => { this.init() });
   }
@@ -73,10 +78,10 @@ export class GameComponent implements OnInit {
     this.totalHpRemaining = 0;
 
     for (let v of this.villainList) {
-      this.totalHpRemaining += v.currentHitPoints;
+      this.totalHpRemaining += v.currentHp;
     }
   }
-  
+
   checkUsesRemaining(): void {
     this.totalUsesRemaining = 0;
 
