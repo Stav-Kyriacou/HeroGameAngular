@@ -1,19 +1,26 @@
+export interface VillainData {
+    id: number;
+    name: string
+}
+
 export class Villain {
     id: number;
     name: string;
-    maxHitPoints: number;
-    currentHitPoints: number;
+    maxHp: number;
+    currentHp: number;
+    maxHpRoll: number = 10;
+    minHpRoll: number = 1;
 
-    constructor(id: number, name: string, minHP: number, maxHP: number) {
-        this.id = id;
-        this.name = name;
-        this.maxHitPoints = Math.floor(Math.random() * maxHP) + minHP;
-        this.currentHitPoints = this.maxHitPoints;
+    constructor(villainData: VillainData) {
+        this.id = villainData.id;
+        this.name = villainData.name;
+        this.maxHp = Math.floor(Math.random() * this.maxHpRoll) + this.minHpRoll;
+        this.currentHp = this.maxHp;
     }
     takeDamage(damage: number): void {
-        this.currentHitPoints -= damage;
-        if (this.currentHitPoints < 0) {
-            this.currentHitPoints = 0;
+        this.currentHp -= damage;
+        if (this.currentHp < 0) {
+            this.currentHp = 0;
         }
     }
 }
