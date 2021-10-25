@@ -19,3 +19,5 @@
 <p id="battle-text" class="battleText" *ngIf="selectedHero != null && selectedVillain != null">{{ selectedHero.name }} is attacking {{ selectedVillain.name }}</p>
 <p id="combatLog" class="combatLog">Combat Log</p>
 <button id="attack-btn" class="attackBtn" (click)="attack()">Attack</button>
+
+<app-game-log></app-game-log>
