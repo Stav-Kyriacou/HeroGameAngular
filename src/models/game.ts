@@ -1,5 +1,5 @@
-export class Game {
+export interface Game {
     gameID: number;
-    dateTimeStarted: Date;
+    dateTimeStarted: any;
     result: string;
 }
