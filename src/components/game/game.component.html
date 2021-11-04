@@ -16,8 +16,26 @@
 </select>
 <hr>
 
-<p id="battle-text" class="battleText" *ngIf="selectedHero != null && selectedVillain != null">{{ selectedHero.name }} is attacking {{ selectedVillain.name }}</p>
+<p id="battle-text" class="battleText" *ngIf="selectedHero != null && selectedVillain != null">{{ selectedHero.name }}
+    is attacking {{ selectedVillain.name }}</p>
 <p id="combatLog" class="combatLog">Combat Log</p>
-<button id="attack-btn" class="attackBtn" (click)="attack()">Attack</button>
+<button id="attack-btn" class="attackBtn" (click)="attack()" [disabled]="this.gameOver">Attack</button>
+<hr>
+<p id="game-result-text" class="battleText">{{ gameResult }}</p>
 
-<app-game-log></app-game-log>
+<div class="game-log">
+    <table>
+        <thead>
+            <th>ID</th>
+            <th>Date Time</th>
+            <th>Result</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let game of gameList.reverse()">
+                <td>{{ game.gameID }}</td>
+                <td>{{ game.dateTimeStarted | date: 'short'}}</td>
+                <td>{{ game.result }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

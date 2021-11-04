@@ -15,9 +15,23 @@
     margin: 5px 0px 5px 0px;
 }
 .attackBtn {
-    width: 100px;
-    height: 30px;
+    width: 120px;
+    height: 40px;
     margin: 5px 0px 5px 0px;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 3px 3px 5px rgb(49, 49, 49);
+    color: white;
+    background-color: rgb(79, 201, 130);
+}
+.attackBtn:hover {
+    background-color: rgb(97, 243, 158);
+}
+.attackBtn:active {
+    transform: scale(.95);
+}
+.attackBtn:disabled {
+    background-color: rgb(49, 49, 49);
 }
 .characterContainer {
     display: flex;
@@ -29,4 +43,27 @@
     margin: 5px;
     padding: 5px;
     border-radius: 10px;
+}
+.game-log table {
+    color: white;
+    border-collapse: collapse;
+    text-align-last: left;
+    margin-top: 10px;
+}
+.game-log thead th{
+    background-color: black;
+    border: none;
+    width: 300px;
+    height: 30px;
+}
+.game-log td, th {
+    padding-left: 10px;
+}
+tr:nth-child(even) {
+    /* background-color: rgb(136, 136, 136); */
+    background-color: rgb(87, 87, 87);
+}
+tr:hover {
+    background-color: yellow;
+    color: black;
 }
