@@ -31,7 +31,7 @@
             <th>Result</th>
         </thead>
         <tbody>
-            <tr *ngFor="let game of gameList.reverse()">
+            <tr *ngFor="let game of gameList">
                 <td>{{ game.gameID }}</td>
                 <td>{{ game.dateTimeStarted | date: 'short'}}</td>
                 <td>{{ game.result }}</td>
