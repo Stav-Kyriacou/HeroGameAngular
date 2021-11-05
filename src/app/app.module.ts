@@ -7,7 +7,6 @@ import { HeroComponent } from '../components/hero/hero.component';
 import { VillainComponent } from '../components/villain/villain.component';
 import { GameComponent } from '../components/game/game.component';
 import { HttpClientModule } from '@angular/common/http';
-import { GameLogComponent } from '../components/game-log/game-log.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +14,6 @@ import { GameLogComponent } from '../components/game-log/game-log.component';
     HeroComponent,
     VillainComponent,
     GameComponent,
-    GameLogComponent,
   ],
   imports: [
     BrowserModule,
