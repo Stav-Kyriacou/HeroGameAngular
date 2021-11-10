@@ -15,15 +15,6 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./game.component.css']
 })
 export class GameComponent implements OnInit {
-  // heroList: Hero[] = [new Hero(1, "Hero One", 1, 6, 3),
-  //                     new Hero(2, "Hero Two", 1, 6, 3),
-  //                     new Hero(3, "Hero Three", 1, 6, 3)];
-  // villainList: Villain[] = [new Villain(1, "Villain One", 1, 10),
-  //                           new Villain(2, "Villain Two", 1, 10),
-  //                           new Villain(2, "Villain Three", 1, 10)];
-  // gameList: Game[] = [new Game(1, new Date("2021-09-13T00:00:00"), "Heroes Won"), 
-  //                     new Game(2, new Date("2021-09-13T00:00:00"), "Villains Won"),
-  //                     new Game(3, new Date("2021-09-13T00:00:00"), "Heroes Won")];
   heroList: Hero[];
   villainList: Villain[];
   gameList: Game[];
@@ -39,17 +30,23 @@ export class GameComponent implements OnInit {
     private _gameService: GameService) {
   }
   ngOnInit(): void {
+    console.log("Hero List before: " + this.heroList);
+
     this._heroService.getAllHeroes().subscribe(heroes => this.heroList = heroes,
       error => console.log("Error: " + error),
-      () => { this.init() });
+      () => {
+        this.init();
+        console.log("Hero List After: ");
+        console.log(this.heroList);
+      });
     this._villainService.getAllVillains().subscribe(villains => this.villainList = villains,
       error => console.log("Error: " + error),
       () => { this.init() });
     this._gameService.getAllGames().subscribe(games => this.gameList = games,
       error => console.log("Error: " + error),
-      () => {
-        console.log("received games");
-      });
+      () => { });
+
+
   }
 
   init(): void {
@@ -57,6 +54,7 @@ export class GameComponent implements OnInit {
       this.selectedHero = this.heroList[0];
     if (this.villainList != null)
       this.selectedVillain = this.villainList[0];
+
   }
 
   attack(): void {
@@ -66,27 +64,30 @@ export class GameComponent implements OnInit {
     if ((this.selectedHero != null || this.selectedVillain != null) && this.totalUsesRemaining > 0) {
       let damage: number = this.selectedHero.attack(this.selectedVillain);
       combatLog.innerHTML = this.selectedHero.name + " dealt " + damage + " damage to " + this.selectedVillain.name;
-      // this.totalUsesRemaining--;
-      // this.totalHpRemaining -= damage;
       this.checkHpRemaining();
       this.checkUsesRemaining();
     }
     this.checkWin();
   }
-
-  selectChange(): void {
-    const heroSelect: HTMLSelectElement = <HTMLSelectElement>document.getElementById('hero-select');
-    const villainSelect: HTMLSelectElement = <HTMLSelectElement>document.getElementById('villain-select');
-
-    this.selectedHero = this.heroList[heroSelect.selectedIndex];
-    this.selectedVillain = this.villainList[villainSelect.selectedIndex];
+  /**
+   * Set the selected hero to the hero component clicked
+   */
+  onSelectHero(hero: Hero) {
+    this.selectedHero = hero;
   }
-
+  /**
+   * Set the selected villain to the villain component clicked
+   */
+  onSelectVillain(villain: Villain)
+  {
+    this.selectedVillain = villain;
+  }
+  /**
+   * Checks if the win condiiton has been met
+   * Counts as hero win if they run out of turns the same turn that all villains die
+   */
   checkWin(): void {
-    console.log("HP: " + this.totalHpRemaining);
-    console.log("Uses: " + this.totalUsesRemaining);
     if (!this.gameOver) {
-      //counts heroes running out of action on the same turn that all the villains die as a win
       if ((this.totalUsesRemaining > 0 && this.totalHpRemaining <= 0) || (this.totalUsesRemaining == 0 && this.totalHpRemaining <= 0)) {
         console.log("Heroes win. Heroes killed the villains");
         this.gameResult = "Heroes win. Heroes killed the villains";
@@ -101,23 +102,25 @@ export class GameComponent implements OnInit {
       }
     }
   }
-
+  /**
+   * Checks the total HP remaining from all villains
+   */
   checkHpRemaining(): void {
     this.totalHpRemaining = 0;
 
     for (let v of this.villainList) {
       this.totalHpRemaining += v.currentHp;
     }
-
   }
-
+  /**
+   * Checks the total Uses remaining from all heroes
+   */
   checkUsesRemaining(): void {
     this.totalUsesRemaining = 0;
 
     for (let h of this.heroList) {
       this.totalUsesRemaining += h.usesRemaining;
     }
-
   }
 
   addGame(heroesWon: boolean) {
@@ -144,6 +147,6 @@ export class GameComponent implements OnInit {
     this.gameList.push(newGame);
     console.log(newGame);
 
-    this._gameService.addNewGame(newGame).subscribe(response => console.log('success' + response));
+    this._gameService.addNewGame(newGame).subscribe(response => console.log('sent new game. Response: ' + response));
   }
 }
