@@ -1,19 +1,15 @@
 <h1 class="title">Heroes</h1>
 <div class="characterContainer">
-    <app-hero class="character" *ngFor="let hero of heroList" [hero]="hero"></app-hero>
+    <app-hero class="hero" [class.selected]="hero === selectedHero" *ngFor="let hero of heroList" [hero]="hero"
+        (click)="onSelectHero(hero)"></app-hero>
 </div>
-<select id="hero-select" (change)="selectChange()">
-    <option *ngFor="let hero of heroList; let i = index" [value]="i">{{ hero.name }}</option>
-</select>
 <hr>
 
 <h1 class="title">Villains</h1>
 <div class="characterContainer">
-    <app-villain class="character" *ngFor="let villain of villainList" [villain]="villain"></app-villain>
+    <app-villain class="villain" [class.selected]="villain === selectedVillain" *ngFor="let villain of villainList"
+        [villain]="villain" (click)="onSelectVillain(villain)"></app-villain>
 </div>
-<select id="villain-select" (change)="selectChange()">
-    <option *ngFor="let villain of villainList; let i = index" [value]="i">{{ villain.name }}</option>
-</select>
 <hr>
 
 <p id="battle-text" class="battleText" *ngIf="selectedHero != null && selectedVillain != null">{{ selectedHero.name }}
