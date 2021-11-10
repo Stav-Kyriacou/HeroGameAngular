@@ -36,13 +36,27 @@
 .characterContainer {
     display: flex;
 }
-.character {
+.hero {
     width: 180px;
     height: 100px;
     background-color: rgb(79, 201, 130);
     margin: 5px;
     padding: 5px;
     border-radius: 10px;
+}
+.hero.selected{
+    border: solid white 3px;
+}
+.villain {
+    width: 180px;
+    height: 100px;
+    background-color: rgb(201, 79, 79);
+    margin: 5px;
+    padding: 5px;
+    border-radius: 10px;
+}
+.villain.selected{
+    border: solid white 3px;
 }
 .game-log table {
     color: white;
